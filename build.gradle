@@ -6,7 +6,7 @@ plugins {
 
 group = 'me.will'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '14'
 
 configurations {
     compileOnly {
@@ -15,6 +15,9 @@ configurations {
 }
 
 repositories {
+    maven{
+        url 'https://maven.aliyun.com/nexus/content/groups/public'
+    }
     mavenCentral()
 }
 
