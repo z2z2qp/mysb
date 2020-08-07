@@ -3,24 +3,33 @@ package me.will.sb.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import me.will.sb.annotation.ServiceLog;
 import me.will.sb.mapper.SBMapper;
+import me.will.sb.mapper.SBRepository;
 import me.will.sb.model.req.QueryReq;
 import me.will.sb.model.resp.App;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SBService {
 
-    public final SBMapper mapper;
+    private final SBMapper mapper;
+    private final SBRepository repository;
 
-    public SBService(SBMapper mapper){
+    public SBService(SBMapper mapper,SBRepository repository){
         this.mapper = mapper;
+        this.repository = repository;
     }
 
     @ServiceLog(name = "query")
-    public App query(QueryReq req) {
-        mapper.selectMaps(new QueryWrapper<>());
-        return new App();
+    public List<App> query(QueryReq req) {
+        return mapper.selectList(new QueryWrapper<>());
+    }
+
+    @ServiceLog(name = "findById")
+    public App findById(Integer id) {
+        return repository.findById(id).orElse(new App());
     }
 }
