@@ -2,7 +2,7 @@ package me.will.sb.exception;
 
 public class SBException extends RuntimeException{
 
-    private Code code;
+    private final Code code;
 
     public SBException(Code code) {
         this.code = code;
