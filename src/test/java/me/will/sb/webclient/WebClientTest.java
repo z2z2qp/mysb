@@ -105,7 +105,7 @@ public class WebClientTest {
     public void testUploadFile() {
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_PNG);
-        var entity = new HttpEntity<ClassPathResource>(new ClassPathResource("file.png"), headers);
+        var entity = new HttpEntity<>(new ClassPathResource("file.png"), headers);
         var param = new LinkedMultiValueMap<String, Object>();
         param.add("file", entity);
         var result = client.post()
