@@ -15,12 +15,22 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Objects;
 
+/**
+ * 日志切片
+ */
 @Aspect
 @Component
 public class LogInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(LogInterceptor.class);
 
+    /**
+     * 接口请求
+     *
+     * @param pjp the pjp
+     * @return the object
+     * @throws Throwable the throwable
+     */
     @Around("execution(public * me.will.sb.controller..*.*(..))")
     public Object log(ProceedingJoinPoint pjp) throws Throwable {
         log.info("args【{}】", obj2Str(pjp.getArgs()));
@@ -37,6 +47,14 @@ public class LogInterceptor {
         return mapper.writeValueAsString(obj);
     }
 
+    /**
+     * service 日志
+     *
+     * @param pjp        the pjp
+     * @param serviceLog the service log
+     * @return the object
+     * @throws Throwable the throwable
+     */
     @Around(value = "@annotation(serviceLog)")
     public Object log(ProceedingJoinPoint pjp, ServiceLog serviceLog) throws Throwable {
         log.info("方法\n{}.{}({})",

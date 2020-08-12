@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * The type Sb service.
+ */
 @Service
 @Transactional
 public class SBService {
