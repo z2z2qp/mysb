@@ -3,7 +3,8 @@ package me.will.sb.common;
 import me.will.sb.exception.SBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.BindException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,21 +15,22 @@ public class MyExceptionHandler {
     public static final Logger log = LoggerFactory.getLogger(MyExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
-    public HttpResult<String> handler(Exception e) {
+    public ResponseEntity<String> handler(Exception e) {
         log.warn("exception is {}", e.getMessage(), e);
-        return HttpResult.FAIL(HttpResult.EXCEPTION, e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
     }
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public HttpResult<String> handler(MethodArgumentNotValidException e) {
+    public ResponseEntity<String> handler(MethodArgumentNotValidException e) {
         log.warn("exception is {}", e.getMessage(), e);
-        return HttpResult.FAIL(HttpResult.PARAM_ERROR, e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return new ResponseEntity<>(e.getBindingResult().getAllErrors().get(0).getDefaultMessage(),
+                                    HttpStatus.EXPECTATION_FAILED);
     }
 
     @ExceptionHandler(SBException.class)
-    public HttpResult<String> handler(SBException e) {
+    public ResponseEntity<String> handler(SBException e) {
         log.warn("exception is {}", e.getMessage(), e);
-        return HttpResult.FAIL(HttpResult.MY_EXCEPTION, e.getMessage());
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
     }
 }
