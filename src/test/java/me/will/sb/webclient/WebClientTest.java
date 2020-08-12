@@ -26,10 +26,10 @@ import java.util.Objects;
  */
 public class WebClientTest {
 
-    private WebClient client;
+    private static WebClient client;
 
     @BeforeAll
-    private void before() {
+    private static void beforeAll() {
         client = WebClient.builder().build();
     }
 
