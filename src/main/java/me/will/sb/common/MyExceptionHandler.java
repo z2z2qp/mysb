@@ -10,10 +10,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
+/**
+ * 统一异常处理
+ */
 @RestControllerAdvice
 public class MyExceptionHandler {
+    /**
+     * The constant log.
+     */
     public static final Logger log = LoggerFactory.getLogger(MyExceptionHandler.class);
 
+    /**
+     * 处理Exception 异常
+     *
+     * @param e the e
+     * @return the response entity
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handler(Exception e) {
         log.warn("exception is {}", e.getMessage(), e);
@@ -21,6 +33,12 @@ public class MyExceptionHandler {
     }
 
 
+    /**
+     * 处理参数异常
+     *
+     * @param e the e
+     * @return the response entity
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handler(MethodArgumentNotValidException e) {
         log.warn("exception is {}", e.getMessage(), e);
@@ -28,6 +46,12 @@ public class MyExceptionHandler {
                                     HttpStatus.EXPECTATION_FAILED);
     }
 
+    /**
+     * 处理自定义异常
+     *
+     * @param e the e
+     * @return the response entity
+     */
     @ExceptionHandler(SBException.class)
     public ResponseEntity<String> handler(SBException e) {
         log.warn("exception is {}", e.getMessage(), e);

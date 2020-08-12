@@ -13,12 +13,20 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * The type Swagger config.
+ */
 @Profile("dev")
 @Configuration
 @EnableKnife4j
 @EnableSwagger2
 public class SwaggerConfig {
 
+    /**
+     * 创建 docket对象
+     *
+     * @return the docket
+     */
     @Bean
     public Docket docket(){
         return new Docket(DocumentationType.SWAGGER_2)
