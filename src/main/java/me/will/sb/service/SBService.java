@@ -1,6 +1,7 @@
 package me.will.sb.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import me.will.sb.annotation.My;
 import me.will.sb.annotation.ServiceLog;
 import me.will.sb.mapper.SBMapper;
 import me.will.sb.mapper.SBRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * The type Sb service.
  */
+@My
 @Service
 @Transactional
 public class SBService {
