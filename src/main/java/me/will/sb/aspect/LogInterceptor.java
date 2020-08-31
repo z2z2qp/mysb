@@ -47,37 +47,4 @@ public class LogInterceptor {
         return mapper.writeValueAsString(obj);
     }
 
-    /**
-     * service 日志
-     *
-     * @param pjp        the pjp
-     * @param serviceLog the service log
-     * @return the object
-     * @throws Throwable the throwable
-     */
-    @Around(value = "@annotation(serviceLog)")
-    public Object log(ProceedingJoinPoint pjp, ServiceLog serviceLog) throws Throwable {
-        log.info("方法\n{}.{}({})",
-                pjp.getSignature().getDeclaringTypeName(),
-                serviceLog.name(),
-                toParam(pjp.getArgs()));
-        return pjp.proceed(pjp.getArgs());
-    }
-
-    private String toParam(Object[] objs) {
-        if (Objects.isNull(objs) || objs.length == 0) {
-            return "";
-        }
-        var sb = new StringBuilder();
-        for (var i = 0; i < objs.length; i++) {
-            sb.append(objs[i].getClass().getSimpleName())
-                    .append(" ")
-                    .append("arg")
-                    .append(i);
-            if (i < objs.length - 1) {
-                sb.append(",");
-            }
-        }
-        return sb.toString();
-    }
 }
