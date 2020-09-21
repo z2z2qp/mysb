@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.StpUtil;
+
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,7 @@ public class Controller {
         this.service = service;
     }
 
+    @SaCheckLogin
     @TimeLog(name = "query")
     @PostMapping("query")
     public ResponseEntity<List<App>> query(@RequestBody @Valid QueryReq req) {
@@ -38,4 +42,12 @@ public class Controller {
         return new ResponseEntity<>(service.findById(id),HttpStatus.OK);
     }
 
+    @GetMapping("/login")
+    public ResponseEntity<Map<String,String>> login(){
+        var id = "adaga";
+        StpUtil.setLoginId(id);
+        var token = StpUtil.getTokenInfo();
+        log.info("{} login token is {}",id,token);
+        return new ResponseEntity<>(token,HttpStatus.OK);
+    }
 }

@@ -1,7 +1,10 @@
 package me.will.sb.exception;
 
 public class SBException extends RuntimeException{
-
+    /**
+     *
+     */
+    private static final long serialVersionUID = 4527067099110409142L;
     private final Code code;
 
     public SBException(Code code) {
