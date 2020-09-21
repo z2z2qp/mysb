@@ -8,6 +8,10 @@ import java.io.Serializable;
 
 public class App implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 5618682104903644348L;
     @Id
     @TableId(type = IdType.AUTO)
     private Long id;
