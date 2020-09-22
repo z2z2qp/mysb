@@ -7,10 +7,14 @@ import me.will.sb.mapper.SBMapper;
 import me.will.sb.mapper.SBRepository;
 import me.will.sb.model.req.QueryReq;
 import me.will.sb.model.resp.App;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * The type Sb service.
@@ -19,6 +23,8 @@ import java.util.List;
 @Service
 @Transactional
 public class SBService {
+
+    private static final Logger log = LoggerFactory.getLogger(SBService.class);
 
     private final SBMapper mapper;
     private final SBRepository repository;
@@ -36,5 +42,16 @@ public class SBService {
     @ServiceLog(name = "findById")
     public App findById(Integer id) {
         return repository.findById(id).orElse(new App());
+    }
+
+    public void asyncA() throws InterruptedException {
+        Thread.sleep(1000);
+        log.info("method A:{}",System.currentTimeMillis());
+    }
+
+    public Future<String> asyncB() throws InterruptedException {
+        Thread.sleep(1000);
+        log.info("method A:{}",System.currentTimeMillis());
+        return new AsyncResult<>("finish");
     }
 }
