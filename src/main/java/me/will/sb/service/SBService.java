@@ -9,6 +9,7 @@ import me.will.sb.model.req.QueryReq;
 import me.will.sb.model.resp.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,14 +45,15 @@ public class SBService {
         return repository.findById(id).orElse(new App());
     }
 
+    @Async
     public void asyncA() throws InterruptedException {
         Thread.sleep(1000);
         log.info("method A:{}",System.currentTimeMillis());
     }
 
+    @Async
     public Future<String> asyncB() throws InterruptedException {
-        Thread.sleep(1000);
-        log.info("method A:{}",System.currentTimeMillis());
+        log.info("method B:{}",System.currentTimeMillis());
         return new AsyncResult<>("finish");
     }
 }
