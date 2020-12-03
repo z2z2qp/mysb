@@ -1,6 +1,7 @@
 package me.will.sb.aspect;
 
 import me.will.sb.annotation.ServiceLog;
+import me.will.sb.annotation.TimeLog;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -31,7 +32,7 @@ public class MethodLogAspect {
      * @throws Throwable the throwable
      */
     @Around(value = "@annotation(timeLog)")
-    public Object time(ProceedingJoinPoint pjp, ServiceLog timeLog) throws Throwable {
+    public Object time(ProceedingJoinPoint pjp, TimeLog timeLog) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = pjp.proceed(pjp.getArgs());
         log.info("method [{}] use time {}ms", timeLog.name(), System.currentTimeMillis() - start);

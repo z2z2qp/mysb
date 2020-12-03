@@ -1,8 +1,10 @@
 package me.will.sb.controller;
 
+import me.will.sb.Version;
 import me.will.sb.annotation.TimeLog;
 import me.will.sb.model.req.QueryReq;
 import me.will.sb.model.resp.App;
+import me.will.sb.model.resp.VersionInfo;
 import me.will.sb.service.SBService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,5 +70,11 @@ public class Controller {
             }
         }
         return ResponseEntity.ok(str);
+    }
+
+    @TimeLog(name = "version")
+    @GetMapping("/version")
+    public ResponseEntity<VersionInfo> version(){
+        return ResponseEntity.ok(new VersionInfo(Version.VERSION,Version.DATE));
     }
 }

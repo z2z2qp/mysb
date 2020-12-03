@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'me.will'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '14'
 
 configurations {
@@ -15,7 +15,7 @@ configurations {
 }
 
 repositories {
-    maven{
+    maven {
         url 'https://maven.aliyun.com/nexus/content/groups/public'
     }
     mavenCentral()
@@ -53,4 +53,34 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+task updateVersion {
+    def versionFileDir = projectDir.getAbsolutePath() + File.separatorChar + 'src' + File.separatorChar + 'main' + File.separatorChar + 'java' + File.separatorChar + 'me' + File.separatorChar + 'will' + File.separatorChar + 'sb' + File.separatorChar + 'Version.java'
+//    println versionFileDir
+    def old = oldValue(versionFileDir, "VERSION")
+//    println old
+    def index = old.indexOf('=')
+    def newVersion = old.substring(0, index + 1) + ' "' + version + '";'
+//    println newVersion
+    def now = new Date().format("yyyy-MM-dd HH:mm:ss")
+    def oldDate = oldValue(versionFileDir, "DATE")
+    index = oldDate.indexOf('=')
+    def date = oldDate.substring(0, index + 1) + ' "' + now + '";'
+    def updateContent = new File(versionFileDir).getText('UTF-8').replaceAll(old,newVersion).replaceAll(oldDate,date)
+    new File(versionFileDir).write(updateContent,'UTF-8')
+}
+
+def static oldValue(path, key) {
+    def readString = ""
+    new File(path).withReader('UTF-8') { reader ->
+        reader.eachLine { str ->
+            if (str.contains(key)) {
+                readString = str
+                return readString
+            }
+            return readString
+        }
+    }
+    return readString
 }
