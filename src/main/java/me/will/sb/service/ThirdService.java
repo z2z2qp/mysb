@@ -1,5 +1,6 @@
 package me.will.sb.service;
 
+import org.apache.logging.log4j.core.async.AsyncLoggerContextSelector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -62,7 +63,11 @@ class ThirdServiceImpl implements Runnable{
     @Override
     public void run() {
         while (onOff){
-            log.info("aaaaaa");
+            log.trace("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
+            log.debug("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
+            log.info("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
+            log.warn("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
+            log.error("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {

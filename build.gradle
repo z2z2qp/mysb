@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'com.lmax:disruptor:3.4.2'
 
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
@@ -39,6 +40,7 @@ dependencies {
 
     //一个鉴权工具
     implementation 'cn.dev33:sa-token:1.4.0'
+    implementation 'cn.hutool:hutool-all:5.5.4'
 
     implementation 'org.reflections:reflections:0.9.12'
 
@@ -58,18 +60,24 @@ test {
     useJUnitPlatform()
 }
 
+/**
+ * 打包前更新版本
+ */
 task updateVersion {
+    //获取版本java文件
     def versionFileDir = projectDir.getAbsolutePath() + File.separatorChar + 'src' + File.separatorChar + 'main' + File.separatorChar + 'java' + File.separatorChar + 'me' + File.separatorChar + 'will' + File.separatorChar + 'sb' + File.separatorChar + 'Version.java'
-//    println versionFileDir
+    //获取旧的版本
     def old = oldValue(versionFileDir, "VERSION")
-//    println old
+    //找到版本号所在位置
     def index = old.indexOf('=')
+    //生成新的版本
     def newVersion = old.substring(0, index + 1) + ' "' + version + '";'
-//    println newVersion
+    // 获得编译时间
     def now = new Date().format("yyyy-MM-dd HH:mm:ss")
     def oldDate = oldValue(versionFileDir, "DATE")
     index = oldDate.indexOf('=')
     def date = oldDate.substring(0, index + 1) + ' "' + now + '";'
+    //替换
     def updateContent = new File(versionFileDir).getText('UTF-8').replaceAll(old,newVersion).replaceAll(oldDate,date)
     new File(versionFileDir).write(updateContent,'UTF-8')
 }
