@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- status=debug 可以查看log4j2的装配过程↓ -->
+<Configuration status="off">
+    <Properties>
+        <Property name="LOG_PATH">logs</Property>
+        <Property name="LOG_NAME">sb</Property>
+    </Properties>
+
+    <Appenders>
+        <!--日志输出到控制台↓-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-40.40logger{39} : %m%n"/>
+            <!--防止DB_LOG标记的日志输出到控制台-->
+            <MarkerFilter marker="DB_LOG" onMatch="DENY" onMismatch="ACCEPT"/>
+        </Console>
+
+        <!--日志输出到文件↓-->
+        <RollingRandomAccessFile name="ProductionLog" fileName="${LOG_PATH}/${LOG_NAME}.log" filePattern="${LOG_PATH}/${LOG_NAME}.%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} -%5p ${PID:-} [%15.15t] %-40.40logger{39} : %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20">
+                <Delete basePath="${LOG_PATH}/" maxDepth="1">
+                    <IfFileName glob="*.log" />
+                    <IfLastModified age="7d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <!--root的日志输出级别↓-->
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ProductionLog" />
+        </Root>
+    </Loggers>
+</Configuration>

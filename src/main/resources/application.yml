@@ -18,3 +18,5 @@ mybatis-plus:
 my:
     control:
         release-list: login,version
+logging:
+    config: classpath:log4j2-spring.xml
