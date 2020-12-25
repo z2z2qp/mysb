@@ -15,4 +15,6 @@ mybatis-plus:
         map-underscore-to-camel-case: true
 #        object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory 
         call-setters-on-nulls: true
-
+my:
+    control:
+        release-list: login,version

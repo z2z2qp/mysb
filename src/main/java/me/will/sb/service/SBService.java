@@ -30,7 +30,7 @@ public class SBService {
     private final SBMapper mapper;
     private final SBRepository repository;
 
-    public SBService(SBMapper mapper,SBRepository repository){
+    public SBService(SBMapper mapper, SBRepository repository) {
         this.mapper = mapper;
         this.repository = repository;
     }
@@ -47,13 +47,14 @@ public class SBService {
 
     @Async
     public void asyncA() throws InterruptedException {
-        Thread.sleep(1000);
-        log.info("method A:{}",System.currentTimeMillis());
+        Thread.sleep(1000L);
+        log.info("method A:{}", System.currentTimeMillis());
     }
 
     @Async
     public Future<String> asyncB() throws InterruptedException {
-        log.info("method B:{}",System.currentTimeMillis());
+        Thread.sleep(1000L);
+        log.info("method B:{}", System.currentTimeMillis());
         return new AsyncResult<>("finish");
     }
 }

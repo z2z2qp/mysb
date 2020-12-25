@@ -49,11 +49,27 @@ public class MethodLogAspect {
      */
     @Around(value = "@annotation(serviceLog)")
     public Object log(ProceedingJoinPoint pjp, ServiceLog serviceLog) throws Throwable {
-        log.info("方法\n{}.{}({})",
+        Object[] args = pjp.getArgs();
+        log.info("方法\n{}.{}({}) {}",
                  pjp.getSignature().getDeclaringTypeName(),
                  serviceLog.name(),
-                 toParam(pjp.getArgs()));
+                 toParam(args),
+                 params(args));
         return pjp.proceed(pjp.getArgs());
+    }
+
+    private Object params(Object[] objs) {
+        if (Objects.isNull(objs) || objs.length == 0) {
+            return "";
+        }
+        var sb = new StringBuilder();
+        for (var i = 0; i < objs.length; i++) {
+            sb.append(objs[i]);
+            if (i < objs.length - 1) {
+                sb.append(",");
+            }
+        }
+        return sb.toString();
     }
 
     private String toParam(Object[] objs) {

@@ -64,7 +64,7 @@ public enum RegExp {
 
     NUMBER("^[-]?\\d+(\\.\\d+)?$"),
     /**
-      * 手机号
+     * 手机号
      */
     PHONE("^1[3|4|5|7|8]\\d{9}$"),
     /**
@@ -91,8 +91,7 @@ public enum RegExp {
     private final String regExp;
 
     public final boolean find(String str) {
-        Pattern pattern = Pattern.compile(this.regExp, 0);
-        return pattern.matcher(str).find();
+        return Pattern.compile(this.regExp, 0).matcher(str).find();
     }
 
     public String toString() {

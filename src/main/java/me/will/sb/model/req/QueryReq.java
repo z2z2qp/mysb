@@ -10,7 +10,7 @@ import java.util.List;
 @ApiModel
 public class QueryReq {
 
-    @ApiModelProperty(name = "name",value = "名称",required = true)
+    @ApiModelProperty(name = "name", value = "名称", required = true)
     private String name;
     private List<String> phone;
     private int i;
@@ -26,7 +26,7 @@ public class QueryReq {
         this.name = name;
     }
 
-    @NotEmpty(message = "not empty")
+    @NotEmpty(message = "phone not empty")
     public List<String> getPhone() {
         return phone;
     }
@@ -35,8 +35,8 @@ public class QueryReq {
         this.phone = phone;
     }
 
-    @Max(value = 10,message = "must lesser then 10")
-    @Min(value = 0 ,message = "must bigger then 0")
+    @Max(value = 10, message = "must lesser then 10")
+    @Min(value = 0, message = "must bigger then 0")
     public int getI() {
         return i;
     }
@@ -45,7 +45,7 @@ public class QueryReq {
         this.i = i;
     }
 
-    @Pattern(message = "date format must be yyyy-MM-dd",regexp = "^\\d{4}-[0,1][0-9]-[0-3][0-9]$")
+    @Pattern(message = "date format must be yyyy-MM-dd", regexp = "^\\d{4}-[0,1][0-9]-[0-3][0-9]$")
     public String getDate() {
         return date;
     }
