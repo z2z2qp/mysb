@@ -73,8 +73,8 @@ task updateVersion {
     //生成新的版本
     def newVersion = old.substring(0, index + 1) + ' "' + version + '";'
     // 获得编译时间
-    def now = new Date().format("yyyy-MM-dd HH:mm:ss")
-    def oldDate = oldValue(versionFileDir, "DATE")
+    String now = new Date().format("yyyy-MM-dd HH:mm:ss")
+    String oldDate = oldValue(versionFileDir, "DATE")
     index = oldDate.indexOf('=')
     def date = oldDate.substring(0, index + 1) + ' "' + now + '";'
     //替换
