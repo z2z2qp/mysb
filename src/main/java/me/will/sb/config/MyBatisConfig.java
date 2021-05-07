@@ -1,6 +1,6 @@
 package me.will.sb.config;
 
-import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +17,8 @@ public class MyBatisConfig {
      * @return the pagination interceptor
      */
     @Bean
-    public PaginationInterceptor interceptor(){
-        return new PaginationInterceptor();
+    public PaginationInnerInterceptor interceptor() {
+        return new PaginationInnerInterceptor();
     }
 
 }

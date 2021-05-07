@@ -1,17 +1,20 @@
 spring:
-    data:
-        mongodb:
-            uri: mongodb://localhost:27017/test
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://www.visionagent.cn:3306/app?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useOldAliasMetadataBehavior=true
-        username: dxl
-        password: dxl@2020
+  data:
+    mongodb:
+      host: 192.168.100.78
+      port: 27017
+      database: test
+      username: hdkj
+      password: Hdkj123!
+      authentication-database: admin
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://www.visionagent.cn:3306/app?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useOldAliasMetadataBehavior=true
+    username: dxl
+    password: dxl@2020
 server:
-    port: 8080
-logging:
-    file:
-        name: sb.log
-    level:
-        root: INFO
-        me.will.sb: DEBUG
+  port: 7373
+#logging:
+#    level:
+#        root: ERROR
+#        me.will.sb: DEBUG

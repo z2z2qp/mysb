@@ -1,6 +1,7 @@
 package me.will.sb.controller;
 
 import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -51,7 +51,7 @@ public class Controller {
 
     @GetMapping("/login")
     @ApiOperation(value = "登录")
-    public ResponseEntity<Map<String, String>> login() {
+    public ResponseEntity<SaTokenInfo> login() {
         var id = "adaga";
         StpUtil.setLoginId(id);
         var token = StpUtil.getTokenInfo();

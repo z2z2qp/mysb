@@ -1,22 +1,19 @@
 spring:
-    jackson:
-        date-format: yyyy-MM-dd HH:mm:ss
-        time-zone: GMT+8
-    profiles:
-        active: prod
-    servlet:
-        multipart:
-            max-file-size: 100MB
-            max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  profiles:
+    active: prod
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
 mybatis:
-    mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/*.xml
 mybatis-plus:
-    configuration:
-        map-underscore-to-camel-case: true
-#        object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory 
-        call-setters-on-nulls: true
-my:
-    control:
-        release-list: login,version
+  configuration:
+    map-underscore-to-camel-case: true
+    #        object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory 
+    call-setters-on-nulls: true
 logging:
-    config: classpath:log4j2-spring.xml
+  config: classpath:log4j2-spring.xml

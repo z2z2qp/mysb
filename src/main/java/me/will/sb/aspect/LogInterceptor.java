@@ -7,12 +7,10 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -23,9 +21,6 @@ import java.util.Objects;
 public class LogInterceptor {
 
     private static final Logger log = LoggerFactory.getLogger(LogInterceptor.class);
-
-    @Value("${my.control.release-list}")
-    private List<String> releaseList;
 
     /**
      * 接口请求

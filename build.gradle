@@ -1,12 +1,20 @@
 plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'idea'
 }
 
 group = 'me.will'
-version = '1.0.0-SNAPSHOT'
-sourceCompatibility = '15'
+version = '1.0.1-SNAPSHOT'
+sourceCompatibility = '16'
+
+idea {
+    module {
+        downloadJavadoc(true)
+        downloadSources(true)
+    }
+}
 
 configurations {
     compileOnly {
@@ -32,21 +40,21 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
-    implementation 'com.lmax:disruptor:3.4.2'
+    implementation 'com.lmax:disruptor:3.4.4'
 
     //mybatis
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.3'
-    implementation 'com.baomidou:mybatis-plus-boot-starter:3.2.0'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.2'
 
     //一个鉴权工具
-    implementation 'cn.dev33:sa-token:1.4.0'
-    implementation 'cn.hutool:hutool-all:5.5.4'
+    implementation 'cn.dev33:sa-token-spring-boot-starter:1.18.0'
+    implementation 'cn.hutool:hutool-all:5.6.4'
 
     implementation 'org.reflections:reflections:0.9.12'
 
     //swagger api接口
-    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:2.0.4'
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.2'
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
 
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -65,7 +73,7 @@ test {
  */
 task updateVersion {
     //获取版本java文件
-    def versionFileDir = projectDir.getAbsolutePath() + File.separatorChar + 'src' + File.separatorChar + 'main' + File.separatorChar + 'java' + File.separatorChar + 'me' + File.separatorChar + 'will' + File.separatorChar + 'sb' + File.separatorChar + 'Version.java'
+    String versionFileDir = projectDir.getAbsolutePath() + File.separatorChar + 'src' + File.separatorChar + 'main' + File.separatorChar + 'java' + File.separatorChar + 'me' + File.separatorChar + 'will' + File.separatorChar + 'sb' + File.separatorChar + 'Version.java'
     //获取旧的版本
     def old = oldValue(versionFileDir, "VERSION")
     //找到版本号所在位置
@@ -78,8 +86,8 @@ task updateVersion {
     index = oldDate.indexOf('=')
     def date = oldDate.substring(0, index + 1) + ' "' + now + '";'
     //替换
-    def updateContent = new File(versionFileDir).getText('UTF-8').replaceAll(old,newVersion).replaceAll(oldDate,date)
-    new File(versionFileDir).write(updateContent,'UTF-8')
+    def updateContent = new File(versionFileDir).getText('UTF-8').replaceAll(old, newVersion).replaceAll(oldDate, date)
+    new File(versionFileDir).write(updateContent, 'UTF-8')
 }
 
 def static oldValue(path, key) {
