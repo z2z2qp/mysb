@@ -1,17 +1,18 @@
 package me.will.sb.config;
 
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import me.will.sb.annotation.OpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * The type Swagger config.
@@ -19,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Profile("dev")
 @Configuration
 @EnableKnife4j
-@EnableSwagger2
+@EnableOpenApi
 public class SwaggerConfig {
 
     /**
@@ -28,8 +29,21 @@ public class SwaggerConfig {
      * @return the docket
      */
     @Bean
-    public Docket docket(){
-        return new Docket(DocumentationType.SWAGGER_2)
+    public Docket docket() {
+        return new Docket(DocumentationType.OAS_30)
+                .groupName("OpenApi")
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("me.will.sb"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(OpenApi.class))
+                .paths(PathSelectors.any())
+                .build();
+    }
+
+    @Bean
+    public Docket AllDocket() {
+        return new Docket(DocumentationType.OAS_30)
+                .groupName("All")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("me.will.sb"))
@@ -37,7 +51,7 @@ public class SwaggerConfig {
                 .build();
     }
 
-    private ApiInfo apiInfo(){
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("我的spring boot 接口文档")
                 .version("1.0.1")

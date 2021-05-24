@@ -3,6 +3,8 @@ package me.will.sb.webclient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Optional;
+
 /**
  * me.will.sb.webclient.CopyTest
  *
@@ -13,14 +15,27 @@ import org.springframework.beans.BeanUtils;
 public class CopyTest {
 
     @Test
-    public void copy(){
-        var a = new A(1,"a",9L);
+    public void copy() {
+        var a = new A(1, "a", 9L);
         var b = new B();
-        BeanUtils.copyProperties(a,b);
+        BeanUtils.copyProperties(a, b);
         System.out.println(b);
+
+        B c = new B();
+        Optional.of(b).ifPresent(it -> {
+            BeanUtils.copyProperties(b, c);
+        });
+        Optional.empty().ifPresentOrElse(it -> {
+            BeanUtils.copyProperties(b, c);
+        }, () -> {
+            c.l = 0;
+
+        });
+        System.out.println(c);
+
     }
 
-    class B{
+    class B {
         private int i;
         private String str;
         private long l;
@@ -68,7 +83,7 @@ public class CopyTest {
         }
     }
 
-    class A{
+    class A {
         private int i;
         private String str;
         private long l;
