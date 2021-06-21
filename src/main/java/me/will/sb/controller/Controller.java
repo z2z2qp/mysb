@@ -6,6 +6,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import me.will.sb.Version;
+import me.will.sb.annotation.OpenApi;
 import me.will.sb.annotation.TimeLog;
 import me.will.sb.model.req.QueryReq;
 import me.will.sb.model.resp.App;
@@ -77,6 +78,7 @@ public class Controller {
         return ResponseEntity.ok(str);
     }
 
+    @OpenApi
     @TimeLog(name = "version")
     @GetMapping("/version")
     @ApiOperation(value = "获取版本号")
