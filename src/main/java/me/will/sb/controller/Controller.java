@@ -54,7 +54,7 @@ public class Controller {
     @ApiOperation(value = "登录")
     public ResponseEntity<SaTokenInfo> login() {
         var id = "adaga";
-        StpUtil.setLoginId(id);
+        StpUtil.login(id);
         var token = StpUtil.getTokenInfo();
         log.info("{} login token is {}", id, token);
         return ResponseEntity.ok(token);
