@@ -1,6 +1,5 @@
 package me.will.sb.service;
 
-import org.apache.logging.log4j.core.async.AsyncLoggerContextSelector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
@@ -28,18 +27,18 @@ public class ThirdService implements ApplicationRunner, ApplicationListener<Cont
      * 初始化
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         service = new ThirdServiceImpl();
     }
 
     /**
      * 具体跑的方法
-     * @param args
-     * @throws Exception
+     *
+     * @param args 参数
      */
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        if (!Objects.isNull(service)){
+    public void run(ApplicationArguments args) {
+        if (!Objects.isNull(service)) {
             new Thread(service).start();
         }
 
@@ -47,7 +46,7 @@ public class ThirdService implements ApplicationRunner, ApplicationListener<Cont
 
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {
-        if (!Objects.isNull(service)){
+        if (!Objects.isNull(service)) {
             service.off();
         }
     }
@@ -56,18 +55,18 @@ public class ThirdService implements ApplicationRunner, ApplicationListener<Cont
 /**
  * 假装的第三方服务
  */
-class ThirdServiceImpl implements Runnable{
+class ThirdServiceImpl implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(ThirdServiceImpl.class);
     private boolean onOff = true;
 
     @Override
     public void run() {
-        while (onOff){
-            log.trace("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
-            log.debug("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
-            log.info("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
-            log.warn("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
-            log.error("是否为异步日志：{}", AsyncLoggerContextSelector.isSelected());
+        while (onOff) {
+            log.trace("{}", "trace");
+            log.debug("{}", "debug");
+            log.info("{}", "info");
+            log.warn("{}", "warn");
+            log.error("{}", "error");
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -80,7 +79,7 @@ class ThirdServiceImpl implements Runnable{
     /**
      * 关闭
      */
-    public void off(){
+    public void off() {
         onOff = false;
     }
 }

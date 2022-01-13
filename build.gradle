@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.5.2'
+    id 'org.springframework.boot' version '2.6.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'idea'
@@ -20,8 +20,6 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
-    all*.exclude module: 'spring-boot-starter-logging'
-    all*.exclude module: 'logback-classic'
 }
 
 repositories {
@@ -37,7 +35,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -45,13 +42,13 @@ dependencies {
 
     //mybatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.3.1'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.3.4'
 
     //一个鉴权工具
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.21.0'
-    implementation 'cn.hutool:hutool-all:5.7.3'
+    implementation 'cn.dev33:sa-token-spring-boot-starter:1.28.0'
+    implementation 'cn.hutool:hutool-all:5.7.18'
 
-    implementation 'org.reflections:reflections:0.9.12'
+    implementation 'org.reflections:reflections:0.10.2'
 
     //swagger api接口
     implementation 'com.github.xiaoymin:knife4j-spring-boot-starter:3.0.3'
