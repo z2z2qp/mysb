@@ -7,7 +7,7 @@ plugins {
 
 group = 'me.will'
 version = '1.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = '17'
 
 idea {
     module {
@@ -41,12 +41,12 @@ dependencies {
     implementation 'com.lmax:disruptor:3.4.4'
 
     //mybatis
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0'
-    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.3.4'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.1'
 
     //一个鉴权工具
-    implementation 'cn.dev33:sa-token-spring-boot-starter:1.28.0'
-    implementation 'cn.hutool:hutool-all:5.7.18'
+    implementation 'cn.dev33:sa-token-spring-boot-starter:1.29.0'
+    implementation 'cn.hutool:hutool-all:5.7.21'
 
     implementation 'org.reflections:reflections:0.10.2'
 
