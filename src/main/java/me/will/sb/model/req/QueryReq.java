@@ -1,16 +1,15 @@
 package me.will.sb.model.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.*;
 
-import javax.validation.constraints.*;
 import java.util.List;
 
 
-@ApiModel
+@Schema(description = "请求对象")
 public class QueryReq {
 
-    @ApiModelProperty(name = "name", value = "名称", required = true)
+    @Schema(name = "name", description = "名称")
     private String name;
     private List<String> phone;
     private int i;

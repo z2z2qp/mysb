@@ -1,6 +1,6 @@
 package me.will.sb.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.mybatisflex.core.query.QueryWrapper;
 import me.will.sb.annotation.My;
 import me.will.sb.annotation.ServiceLog;
 import me.will.sb.mapper.SBMapper;
@@ -10,11 +10,11 @@ import me.will.sb.model.resp.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Future;
 
 /**
@@ -37,7 +37,7 @@ public class SBService {
 
     @ServiceLog(name = "query")
     public List<App> query(QueryReq req) {
-        return mapper.selectList(new QueryWrapper<>());
+        return mapper.selectListByQuery(QueryWrapper.create());
     }
 
     @ServiceLog(name = "findById")
@@ -46,15 +46,28 @@ public class SBService {
     }
 
     @Async
-    public void asyncA() throws InterruptedException {
-        Thread.sleep(1000L);
-        log.info("method A:{}", System.currentTimeMillis());
+    public void asyncA() {
+        CompletableFuture.runAsync(() -> {
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("method A:{}", System.currentTimeMillis());
+        });
     }
 
     @Async
-    public Future<String> asyncB() throws InterruptedException {
-        Thread.sleep(1000L);
+    public Future<String> asyncB() {
         log.info("method B:{}", System.currentTimeMillis());
-        return new AsyncResult<>("finish");
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            log.info("method B2:{}", System.currentTimeMillis());
+            return "异步";
+        });
     }
 }

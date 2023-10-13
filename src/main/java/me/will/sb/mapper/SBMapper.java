@@ -1,6 +1,7 @@
 package me.will.sb.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import com.mybatisflex.core.BaseMapper;
 import me.will.sb.model.resp.App;
 import org.apache.ibatis.annotations.Mapper;
 

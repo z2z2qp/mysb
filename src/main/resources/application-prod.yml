@@ -1,9 +1,17 @@
 spring:
+  data:
+    mongodb:
+      authentication-database: admin
+      password: '704B2'
+      username: root
+      host: 127.0.0.1
+      port: 27017
+      database: app
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/app?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true&useOldAliasMetadataBehavior=true
     username: root
-    password: zdjxyjy123$
+    password: 704B2C1C67DB348E49F581318334A457
 server:
   port: 8080
 logging:
@@ -11,4 +19,4 @@ logging:
     name: sb.log
   level:
     root: ERROR
-    me.will.sb: WARN
+    me.will.sb: INFO

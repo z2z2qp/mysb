@@ -10,6 +10,6 @@ package me.will.sb;
 public final class Version {
 
     public static final String VERSION = "1.0.1-SNAPSHOT";
-    public static final String DATE = "2022-01-13 11:18:49";
+    public static final String DATE = "2023-10-13 14:36:34";
 
 }
