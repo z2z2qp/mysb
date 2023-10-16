@@ -1,4 +1,4 @@
-package me.will.sb.model.resp;
+package me.will.sb.entity;
 
 
 import com.mybatisflex.annotation.Id;

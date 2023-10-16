@@ -6,7 +6,7 @@ import me.will.sb.annotation.ServiceLog;
 import me.will.sb.mapper.SBMapper;
 import me.will.sb.mapper.SBRepository;
 import me.will.sb.model.req.QueryReq;
-import me.will.sb.model.resp.App;
+import me.will.sb.entity.App;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;

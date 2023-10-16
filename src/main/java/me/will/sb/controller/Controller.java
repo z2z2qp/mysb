@@ -10,7 +10,7 @@ import me.will.sb.Version;
 import me.will.sb.annotation.OpenApi;
 import me.will.sb.annotation.TimeLog;
 import me.will.sb.model.req.QueryReq;
-import me.will.sb.model.resp.App;
+import me.will.sb.entity.App;
 import me.will.sb.model.resp.VersionInfo;
 import me.will.sb.service.SBService;
 import org.slf4j.Logger;
