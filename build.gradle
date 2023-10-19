@@ -94,7 +94,7 @@ tasks.register('updateVersion') {
     new File(versionFileDir).write(updateContent, 'UTF-8')
 }
 
-def static oldValue(path, key) {
+def static oldValue(String path,String  key) {
     def readString = ""
     new File(path).withReader('UTF-8') { reader ->
         reader.eachLine { str ->

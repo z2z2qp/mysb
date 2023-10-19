@@ -13,8 +13,8 @@ spring:
       max-request-size: 100MB
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-    #        object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
-    call-setters-on-nulls: true
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#            object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
+#    call-setters-on-nulls: true
