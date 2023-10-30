@@ -38,7 +38,7 @@ public class LogInterceptor {
      */
     @Around("execution(public * me.will.sb.controller..*.*(..))")
     public Object log(ProceedingJoinPoint pjp) throws Throwable {
-        loger.info("args【{}】", obj2Str(pjp.getArgs()));
+        loger.info("args【{}】", pjp.getArgs());
         var attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         var request = Objects.requireNonNull(attributes, "ServletRequestAttributes is null").getRequest();
         var param = request.getParameterMap();
